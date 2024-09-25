@@ -1,0 +1,29 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+{% block extrastyle %}
+    <link rel="stylesheet" type="text/css" href="{% static "admin/css/forms.css" %}">
+{% endblock %}
+{% block content %}
+    <form enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        <div>
+            <fieldset class="module aligned">
+                <legend></legend>
+                {% for field in form %}
+                    <div class="form-row">
+                        <div>
+                            <label class="required" for="{{ field.name }}">{{ field.label }}:</label>
+                            {{ field }}
+                            {% if field.field.help_text %}
+                                <div class="help">{{ field.field.help_text|safe }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </fieldset>
+        </div>
+        <div class="submit-row">
+            <input type="submit" value="{{ action }}" class="default">
+        </div>
+    </form>
+{% endblock %}

@@ -2,18 +2,18 @@ from django.db import models
 
 
 class Book(models.Model):
-    id = models.IntegerField(primary_key=True)
+    book_id = models.IntegerField()
     goodreads_book_id = models.IntegerField()
     best_book_id = models.IntegerField()
     work_id = models.IntegerField()
     books_count = models.IntegerField()
     isbn = models.CharField(max_length=15)
-    isbn13 = models.CharField(max_length=15)
+    isbn13 = models.CharField(max_length=15, unique=True)
     authors = models.CharField(max_length=255)
     original_publication_year = models.IntegerField()
-    original_title = models.CharField(max_length=255)
+    original_title = models.CharField(max_length=255, blank=True)
     title = models.CharField(max_length=255)
-    language_code = models.CharField(max_length=10)
+    language_code = models.CharField(max_length=10, blank=True)
     average_rating = models.FloatField()
     ratings_count = models.IntegerField()
     work_ratings_count = models.IntegerField()
