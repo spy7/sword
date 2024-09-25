@@ -1,13 +1,14 @@
 [tool.poetry]
-name = "sword"
+name = "be-sword"
 version = "0.1.0"
 description = ""
 authors = ["Carlos Souza <carlosspy@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
-
+python = "^3.12"
+django = "^5.1.1"
+djangorestframework = "^3.15.2"
 
 [build-system]
 requires = ["poetry-core"]
