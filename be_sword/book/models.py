@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Book(models.Model):
+    id = models.IntegerField(primary_key=True)
     goodreads_book_id = models.IntegerField()
     best_book_id = models.IntegerField()
     work_id = models.IntegerField()
