@@ -7,6 +7,7 @@ from django.urls import path
 from book.forms import UploadBooksForm
 from book.models import Book
 from book.utils import handle_books_uploaded
+from book.utils import send_uploaded_email
 
 
 @admin.register(Book)
@@ -33,10 +34,9 @@ class BookAdmin(admin.ModelAdmin):
                 self.message_user(request, "Books successfully added", messages.SUCCESS)
                 if invalid_books:
                     self.message_user(
-                        request,
-                        f"Invalid books: {', '.join([book['isbn13'] for book in invalid_books])}",
-                        messages.WARNING,
+                        request, f"Invalid books: {invalid_books}", messages.WARNING
                     )
+                send_uploaded_email(invalid_books)
                 return redirect("admin:book_book_changelist")
         else:
             form = UploadBooksForm()

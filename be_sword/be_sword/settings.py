@@ -10,7 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
+
 from pathlib import Path
+
+from be_sword.utils import strtobool
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +24,22 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-qvox7r$ebs02jp_eofdp+cje)(=j%*99lc*x4^%&abdjubw0+2"
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = strtobool(os.getenv("DJANGO_DEBUG", "False"))
 
-ALLOWED_HOSTS = []
+DJANGO_ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS")
+
+ALLOWED_HOSTS = DJANGO_ALLOWED_HOSTS.split(",") if DJANGO_ALLOWED_HOSTS else ["*"]
+
+# CSRF
+CSRF_TRUSTED_ORIGINS: list[str] | str
+if CSRF_TRUSTED_ORIGINS := os.getenv("CSRF_TRUSTED_ORIGINS", ""):
+    CSRF_TRUSTED_ORIGINS = CSRF_TRUSTED_ORIGINS.split(",")
+
+CSRF_COOKIE_SECURE = strtobool(os.getenv("CSRF_COOKIE_SECURE", "True"))
+SESSION_COOKIE_SECURE = strtobool(os.getenv("SESSION_COOKIE_SECURE", "True"))
 
 
 # Application definition
@@ -123,3 +137,18 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+EMAIL_MOCK = strtobool(os.getenv("EMAIL_MOCK", "True"))
+if EMAIL_MOCK:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+EMAIL_HOST = os.getenv("EMAIL_HOST")
+EMAIL_PORT = os.getenv("EMAIL_PORT")
+EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
+EMAIL_SYSTEM_ADMIN = os.getenv("EMAIL_SYSTEM_ADMIN")
+EMAIL_UPLOAD_SUBJECT = os.getenv("EMAIL_UPLOAD_SUBJECT")
+EMAIL_UPLOAD_MESSAGE = os.getenv("EMAIL_UPLOAD_MESSAGE")
