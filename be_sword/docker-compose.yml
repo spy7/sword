@@ -1,0 +1,42 @@
+# https://docs.docker.com/compose/compose-file/compose-file-v3/#extension-fields
+x-build: &dockerfile-dev-build
+  context: .
+  dockerfile: Dockerfile
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - sword
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: *dockerfile-dev-build
+    environment:
+      - DB_LOCAL=False
+    env_file: .env
+    volumes:
+      - .:/app
+    ports:
+      - "${DJANGO_BIND_PORT}:${DJANGO_BIND_PORT}"
+    depends_on:
+      db:
+        condition: service_healthy
+    command:
+      [
+        "./scripts/start-development.sh",
+      ]
+    networks:
+      - sword
+
+networks:
+  sword:

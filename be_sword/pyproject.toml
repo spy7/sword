@@ -11,6 +11,10 @@ django = "^5.1.1"
 djangorestframework = "^3.15.2"
 model-bakery = "^1.19.5"
 django-filter = "^24.3"
+python-json-logger = "^2.0.7"
+request-id-django-log = "^0.2.0"
+drf-link-navigation-pagination = "^0.1.0"
+psycopg2-binary = "^2.9.9"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.3.3"
