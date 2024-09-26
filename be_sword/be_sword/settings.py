@@ -166,7 +166,7 @@ else:
 
 EMAIL_HOST = os.getenv("EMAIL_HOST")
 EMAIL_PORT = os.getenv("EMAIL_PORT")
-EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS")
+EMAIL_USE_TLS = strtobool(os.getenv("EMAIL_USE_TLS", "False"))
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_SYSTEM_ADMIN = os.getenv("EMAIL_SYSTEM_ADMIN")
@@ -177,17 +177,15 @@ EMAIL_UPLOAD_FAIL = os.getenv("EMAIL_UPLOAD_FAIL")
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "filters": {"request_id": {"()": "request_id_django_log.filters.RequestIDFilter"}},
     "formatters": {
         "standard": {
             "()": JsonFormatter,
-            "format": "%(levelname)-8s [%(asctime)s] [%(request_id)s] %(name)s: %(message)s",
+            "format": "%(levelname)-8s [%(asctime)s]: %(message)s",
         },
     },
     "handlers": {
         "console": {
             "class": "logging.StreamHandler",
-            "filters": ["request_id"],
             "formatter": os.getenv("DEFAULT_LOG_FORMATTER", "standard"),
         }
     },

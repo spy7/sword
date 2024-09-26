@@ -23,6 +23,7 @@ services:
     build: *dockerfile-dev-build
     environment:
       - DB_LOCAL=False
+      - EMAIL_MOCK=False
     env_file: .env
     volumes:
       - .:/app
@@ -31,12 +32,27 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      mailhog:
+        condition: service_started
     command:
       [
         "./scripts/start-development.sh",
       ]
     networks:
       - sword
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - sword
+
+volumes:
+  maildata:
+  mailstate:
+  maillogs:
 
 networks:
   sword:

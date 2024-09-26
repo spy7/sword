@@ -522,17 +522,6 @@ files = [
 ]
 
 [[package]]
-name = "request-id-django-log"
-version = "0.2.0"
-description = "A simple way to implement request_id in Django"
-optional = false
-python-versions = "*"
-files = [
-    {file = "request_id_django_log-0.2.0-py3-none-any.whl", hash = "sha256:cd860ebede18c8dace21ea565282521b44ea3f91a5c819baf4adf1d3db8d725c"},
-    {file = "request_id_django_log-0.2.0.tar.gz", hash = "sha256:9a4ee69a5d5f70b8a34938a99de1c4c0878a44f8c3c84d2ab85195b1d15563d9"},
-]
-
-[[package]]
 name = "sqlparse"
 version = "0.5.1"
 description = "A non-validating SQL parser."
@@ -572,4 +561,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "e0f788cc43f7d6ca2c8a3841a6801608ba4f3ccaacc0bf43a6b1bf0b63344564"
+content-hash = "341b2619b9c6720d48cbda6d5e05b5fe2195970a32a4ff595910ea80fe3674bb"
