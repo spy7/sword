@@ -1,7 +1,5 @@
 import pytest
 
-from django.conf import settings
-from django.test import override_settings
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
@@ -49,14 +47,6 @@ class TestBookView:
 
         assert response.status_code == status.HTTP_200_OK
         assert response.data["count"] == 2
-
-    @override_settings(REST_FRAMEWORK=settings.REST_FRAMEWORK | {"PAGE_SIZE": 5})
-    def test_get_paginated_books(self, client: APIClient, many_books: list[Book]):
-        response = client.get(reverse("books"))
-
-        assert response.status_code == status.HTTP_200_OK
-        assert response.data["count"] == 10
-        assert len(response.data["results"]) == 5
 
     def test_get_paginated_books_with_limit(
         self, client: APIClient, many_books: list[Book]

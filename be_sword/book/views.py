@@ -1,4 +1,5 @@
 from rest_framework.generics import ListAPIView
+from rest_framework.generics import RetrieveAPIView
 
 from book.filters import BookFilter
 from book.models import Book
@@ -10,6 +11,7 @@ class BookView(ListAPIView):
     queryset = Book.objects.all()
     filterset_class = BookFilter
 
-    def get(self, request, *args, **kwargs):
-        response = super().get(request, *args, **kwargs)
-        return response
+
+class BookDetailView(RetrieveAPIView):
+    serializer_class = BookSerializer
+    queryset = Book.objects.all()

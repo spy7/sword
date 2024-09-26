@@ -50,6 +50,6 @@ def send_uploaded_email(success: int, invalid_books: dict[str, dict]) -> None:
     recipient_list = [settings.EMAIL_SYSTEM_ADMIN]
 
     if invalid_books:
-        message += fail_message
+        message += "\n" + fail_message
 
     send_mail(subject, message, from_email, recipient_list)
