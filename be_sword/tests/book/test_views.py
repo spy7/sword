@@ -1,10 +1,11 @@
-from django.conf import settings
 import pytest
 
+from django.conf import settings
+from django.test import override_settings
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APIClient
-from django.test import override_settings
+
 from book.models import Book
 
 
@@ -57,14 +58,18 @@ class TestBookView:
         assert response.data["count"] == 10
         assert len(response.data["results"]) == 5
 
-    def test_get_paginated_books_with_limit(self, client: APIClient, many_books: list[Book]):
+    def test_get_paginated_books_with_limit(
+        self, client: APIClient, many_books: list[Book]
+    ):
         response = client.get(reverse("books"), {"limit": 5})
 
         assert response.status_code == status.HTTP_200_OK
         assert response.data["count"] == 10
         assert len(response.data["results"]) == 5
 
-    def test_get_paginated_books_with_offset(self, client: APIClient, many_books: list[Book]):
+    def test_get_paginated_books_with_offset(
+        self, client: APIClient, many_books: list[Book]
+    ):
         response = client.get(reverse("books"), {"offset": 9})
 
         assert response.status_code == status.HTTP_200_OK

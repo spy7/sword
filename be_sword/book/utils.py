@@ -37,7 +37,7 @@ def treat_serializer_errors(errors: dict) -> dict:
     return treated_errors
 
 
-def send_uploaded_email(success: int, invalid_books: str) -> None:
+def send_uploaded_email(success: int, invalid_books: dict[str, dict]) -> None:
     """
     Send an email to the system admin with the upload results
     """

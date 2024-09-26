@@ -4,8 +4,9 @@ from unittest.mock import patch
 import pytest
 
 from book.models import Book
-from book.utils import handle_books_uploaded, treat_serializer_errors
+from book.utils import handle_books_uploaded
 from book.utils import send_uploaded_email
+from book.utils import treat_serializer_errors
 
 
 @pytest.mark.django_db()

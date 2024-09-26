@@ -1,11 +1,12 @@
-from book.models import Book
-from django_filters.rest_framework import FilterSet
 from django_filters import CharFilter
+from django_filters.rest_framework import FilterSet
+
+from book.models import Book
 
 
 class BookFilter(FilterSet):
-    title = CharFilter(lookup_expr='icontains')
-    content = CharFilter(lookup_expr='icontains')
+    title = CharFilter(lookup_expr="icontains")
+    content = CharFilter(lookup_expr="icontains")
 
     class Meta:
         model = Book
