@@ -3,7 +3,11 @@ from unittest.mock import MagicMock
 import pytest
 
 from django.core.files.uploadedfile import SimpleUploadedFile
+from model_bakery import baker
 from rest_framework.exceptions import ErrorDetail
+from rest_framework.test import APIClient
+
+from book.models import Book
 
 
 @pytest.fixture
@@ -39,3 +43,40 @@ def csv_file(csv_content: str) -> MagicMock:
 @pytest.fixture
 def serializer_error() -> dict:
     return {"isbn13": [ErrorDetail(string="This field is required.", code="required")]}
+
+
+@pytest.fixture
+def client() -> APIClient:
+    return APIClient()
+
+
+@pytest.fixture
+def book() -> Book:
+    return baker.make(
+        Book,
+        title="Book one",
+        authors="Author one",
+        isbn13="1234567890123",
+        language_code="eng",
+    )
+
+
+@pytest.fixture
+def book2() -> Book:
+    return baker.make(
+        Book,
+        title="Book two",
+        authors="Somebody",
+        isbn13="5555555555555",
+        language_code="pt",
+    )
+
+
+@pytest.fixture
+def books(book: Book, book2: Book) -> list[Book]:
+    return [book, book2]
+
+
+@pytest.fixture
+def many_books() -> list[Book]:
+    return [baker.make(Book) for _ in range(10)]

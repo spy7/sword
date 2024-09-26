@@ -14,6 +14,8 @@ import os
 
 from pathlib import Path
 
+from pythonjsonlogger.jsonlogger import JsonFormatter
+
 from be_sword.utils import strtobool
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -52,6 +54,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "django_filters",
     "book",
 ]
 
@@ -96,6 +99,11 @@ DATABASES = {
     }
 }
 
+REST_FRAMEWORK = {
+    "DEFAULT_PAGINATION_CLASS": "drf_link_navigation_pagination.LinkNavigationPagination",
+    "PAGE_SIZE": int(os.getenv("PAGE_SIZE", 30)),
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -153,3 +161,42 @@ EMAIL_SYSTEM_ADMIN = os.getenv("EMAIL_SYSTEM_ADMIN")
 EMAIL_UPLOAD_SUBJECT = os.getenv("EMAIL_UPLOAD_SUBJECT")
 EMAIL_UPLOAD_MESSAGE = os.getenv("EMAIL_UPLOAD_MESSAGE")
 EMAIL_UPLOAD_FAIL = os.getenv("EMAIL_UPLOAD_FAIL")
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "filters": {"request_id": {"()": "request_id_django_log.filters.RequestIDFilter"}},
+    "formatters": {
+        "standard": {
+            "()": JsonFormatter,
+            "format": "%(levelname)-8s [%(asctime)s] [%(request_id)s] %(name)s: %(message)s",
+        },
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "filters": ["request_id"],
+            "formatter": os.getenv("DEFAULT_LOG_FORMATTER", "standard"),
+        }
+    },
+    "loggers": {
+        "": {"level": os.getenv("ROOT_LOG_LEVEL", "INFO"), "handlers": ["console"]},
+        "be_sword": {
+            "level": os.getenv("PROJECT_LOG_LEVEL", "INFO"),
+            "handlers": ["console"],
+            "propagate": False,
+        },
+        "django": {
+            "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
+            "handlers": ["console"],
+        },
+        "django.db.backends": {
+            "level": os.getenv("DJANGO_DB_BACKENDS_LOG_LEVEL", "INFO"),
+            "handlers": ["console"],
+        },
+        "django.request": {
+            "level": os.getenv("DJANGO_REQUEST_LOG_LEVEL", "INFO"),
+            "handlers": ["console"],
+        },
+    },
+}

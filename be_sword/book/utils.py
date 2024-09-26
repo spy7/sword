@@ -38,12 +38,14 @@ def treat_serializer_errors(errors: dict) -> dict:
 
 
 def send_uploaded_email(success: int, invalid_books: str) -> None:
-    '''
+    """
     Send an email to the system admin with the upload results
-    '''
+    """
     subject = settings.EMAIL_UPLOAD_SUBJECT
     message = settings.EMAIL_UPLOAD_MESSAGE % success
-    fail_message = settings.EMAIL_UPLOAD_FAIL % ', '.join(f"{b[0]}: {b[1]}" for b in invalid_books.items())
+    fail_message = settings.EMAIL_UPLOAD_FAIL % ", ".join(
+        f"{b[0]}: {b[1]}" for b in invalid_books.items()
+    )
     from_email = settings.EMAIL_HOST_USER
     recipient_list = [settings.EMAIL_SYSTEM_ADMIN]
 

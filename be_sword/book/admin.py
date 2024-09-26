@@ -31,10 +31,14 @@ class BookAdmin(admin.ModelAdmin):
             if form.is_valid():
                 file = form.cleaned_data["file"]
                 success, invalid_books = handle_books_uploaded(file)
-                self.message_user(request, f"{success} books successfully added", messages.SUCCESS)
+                self.message_user(
+                    request, f"{success} books successfully added", messages.SUCCESS
+                )
                 if invalid_books:
                     self.message_user(
-                        request, f"Invalid books: {", ".join(invalid_books.keys())}", messages.WARNING
+                        request,
+                        f"Invalid books: {", ".join(invalid_books.keys())}",
+                        messages.WARNING,
                     )
                 send_uploaded_email(success, invalid_books)
                 return redirect("admin:book_book_changelist")
