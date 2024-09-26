@@ -30,13 +30,13 @@ class BookAdmin(admin.ModelAdmin):
             form = UploadBooksForm(request.POST, request.FILES)
             if form.is_valid():
                 file = form.cleaned_data["file"]
-                invalid_books = handle_books_uploaded(file)
-                self.message_user(request, "Books successfully added", messages.SUCCESS)
+                success, invalid_books = handle_books_uploaded(file)
+                self.message_user(request, f"{success} books successfully added", messages.SUCCESS)
                 if invalid_books:
                     self.message_user(
-                        request, f"Invalid books: {invalid_books}", messages.WARNING
+                        request, f"Invalid books: {", ".join(invalid_books.keys())}", messages.WARNING
                     )
-                send_uploaded_email(invalid_books)
+                send_uploaded_email(success, invalid_books)
                 return redirect("admin:book_book_changelist")
         else:
             form = UploadBooksForm()

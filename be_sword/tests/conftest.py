@@ -3,6 +3,7 @@ from unittest.mock import MagicMock
 import pytest
 
 from django.core.files.uploadedfile import SimpleUploadedFile
+from rest_framework.exceptions import ErrorDetail
 
 
 @pytest.fixture
@@ -33,3 +34,8 @@ def csv_file(csv_content: str) -> MagicMock:
         "books.csv", csv_content.encode("utf-8"), content_type="text/csv"
     )
     return csv_file
+
+
+@pytest.fixture
+def serializer_error() -> dict:
+    return {"isbn13": [ErrorDetail(string="This field is required.", code="required")]}

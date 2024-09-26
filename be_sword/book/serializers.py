@@ -17,3 +17,8 @@ class BookUploadSerializer(BookSerializer):
             float(data["original_publication_year"])
         )
         return super().to_internal_value(data)
+
+
+class BookResultSerializer(serializers.Serializer):
+    number_of_books = serializers.IntegerField()
+    invalid_books = serializers.ListField(child=serializers.CharField())
