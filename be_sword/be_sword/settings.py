@@ -40,13 +40,20 @@ CSRF_TRUSTED_ORIGINS: list[str] | str
 if CSRF_TRUSTED_ORIGINS := os.getenv("CSRF_TRUSTED_ORIGINS", ""):
     CSRF_TRUSTED_ORIGINS = CSRF_TRUSTED_ORIGINS.split(",")
 
-CSRF_COOKIE_SECURE = strtobool(os.getenv("CSRF_COOKIE_SECURE", "True"))
-SESSION_COOKIE_SECURE = strtobool(os.getenv("SESSION_COOKIE_SECURE", "True"))
+CSRF_COOKIE_SECURE = strtobool(os.getenv("CSRF_COOKIE_SECURE", "False"))
+SESSION_COOKIE_SECURE = strtobool(os.getenv("SESSION_COOKIE_SECURE", "False"))
 
+# CORS
+CORS_ALLOWED_ORIGINS: list[str] | str
+if CORS_ALLOWED_ORIGINS := os.getenv("CORS_ALLOWED_ORIGINS", ""):
+    CORS_ALLOWED_ORIGINS = CORS_ALLOWED_ORIGINS.split(",")
+else:
+    CORS_ALLOW_ALL_ORIGINS = True
 
 # Application definition
 
 INSTALLED_APPS = [
+    "corsheaders",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -59,6 +66,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -167,12 +175,14 @@ else:
 EMAIL_HOST = os.getenv("EMAIL_HOST")
 EMAIL_PORT = os.getenv("EMAIL_PORT")
 EMAIL_USE_TLS = strtobool(os.getenv("EMAIL_USE_TLS", "False"))
-EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
-EMAIL_SYSTEM_ADMIN = os.getenv("EMAIL_SYSTEM_ADMIN")
-EMAIL_UPLOAD_SUBJECT = os.getenv("EMAIL_UPLOAD_SUBJECT")
-EMAIL_UPLOAD_MESSAGE = os.getenv("EMAIL_UPLOAD_MESSAGE")
-EMAIL_UPLOAD_FAIL = os.getenv("EMAIL_UPLOAD_FAIL")
+EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER", "host_user@example.com")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", "host_password")
+EMAIL_SYSTEM_ADMIN = os.getenv("EMAIL_SYSTEM_ADMIN", "sysadmin@example.com")
+EMAIL_UPLOAD_SUBJECT = os.getenv("EMAIL_UPLOAD_SUBJECT", "Books uploaded")
+EMAIL_UPLOAD_MESSAGE = os.getenv(
+    "EMAIL_UPLOAD_MESSAGE", "%s books uploaded successfully"
+)
+EMAIL_UPLOAD_FAIL = os.getenv("EMAIL_UPLOAD_FAIL", "Invalid books:")
 
 LOGGING = {
     "version": 1,

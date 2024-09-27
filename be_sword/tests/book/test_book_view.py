@@ -48,6 +48,38 @@ class TestBookView:
         assert response.status_code == status.HTTP_200_OK
         assert response.data["count"] == 2
 
+    def test_get_books_filter_by_unique_author(
+        self, client: APIClient, books: list[Book]
+    ):
+        response = client.get(reverse("books"), {"authors": "author"})
+
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data["count"] == 1
+
+    def test_get_books_filter_by_unique_isbn(
+        self, client: APIClient, books: list[Book]
+    ):
+        response = client.get(reverse("books"), {"isbn13": "12345"})
+
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data["count"] == 1
+
+    def test_get_books_filter_by_search_title(
+        self, client: APIClient, books: list[Book]
+    ):
+        response = client.get(reverse("books"), {"search": "book one"})
+
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data["count"] == 1
+
+    def test_get_books_filter_by_search_author(
+        self, client: APIClient, books: list[Book]
+    ):
+        response = client.get(reverse("books"), {"search": "some"})
+
+        assert response.status_code == status.HTTP_200_OK
+        assert response.data["count"] == 1
+
     def test_get_paginated_books_with_limit(
         self, client: APIClient, many_books: list[Book]
     ):
