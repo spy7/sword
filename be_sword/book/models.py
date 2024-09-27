@@ -9,7 +9,7 @@ class Book(models.Model):
     books_count = models.IntegerField()
     isbn = models.CharField(max_length=15, blank=True)
     isbn13 = models.CharField(max_length=15, blank=True)
-    authors = models.CharField(max_length=255, blank=True)
+    authors = models.TextField(blank=True)
     original_publication_year = models.IntegerField()
     original_title = models.CharField(max_length=255, blank=True)
     title = models.CharField(max_length=255)
