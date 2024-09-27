@@ -65,25 +65,19 @@ const HomePage = () => {
                 </div>
             </div>
 
-            {loading ? (
-                <p>Loading books...</p>
-            ) : (
-                <>
-                    <Pagination page={page} totalPages={totalPages} onPrev={prevPage} onNext={nextPage} />
+            <Pagination page={page} totalPages={totalPages} onPrev={prevPage} onNext={nextPage} />
 
-                    <div className="book-list">
-                        {books.map(book => (
-                            <Link to={`/book/${book.id}`} key={book.id} className="book-item">
-                                <img src={book.image_url} alt={book.title} className="book-image" />
-                                <h3>{book.title}</h3>
-                                <p>{book.authors}</p>
-                            </Link>
-                        ))}
-                    </div>
+            <div className="book-list">
+                {books.map(book => (
+                    <Link to={`/book/${book.book_id}`} key={book.book_id} className="book-item">
+                        <img src={book.image_url} alt={book.title} className="book-image" />
+                        <h3>{book.title}</h3>
+                        <p>{book.authors}</p>
+                    </Link>
+                ))}
+            </div>
 
-                    <Pagination page={page} totalPages={totalPages} onPrev={prevPage} onNext={nextPage} />
-                </>
-            )}
+            <Pagination page={page} totalPages={totalPages} onPrev={prevPage} onNext={nextPage} />
         </div>
     );
 };
