@@ -2,13 +2,13 @@ from django.db import models
 
 
 class Book(models.Model):
-    book_id = models.IntegerField()
+    book_id = models.IntegerField(unique=True)
     goodreads_book_id = models.IntegerField()
     best_book_id = models.IntegerField()
     work_id = models.IntegerField()
     books_count = models.IntegerField()
     isbn = models.CharField(max_length=15)
-    isbn13 = models.CharField(max_length=15, unique=True)
+    isbn13 = models.CharField(max_length=15)
     authors = models.CharField(max_length=255)
     original_publication_year = models.IntegerField()
     original_title = models.CharField(max_length=255, blank=True)

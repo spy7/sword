@@ -12,8 +12,8 @@ from book.utils import send_uploaded_email
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
-    list_display = ["title", "authors", "isbn13"]
-    search_fields = ["title", "authors", "isbn13"]
+    list_display = ["book_id", "title", "authors", "isbn13"]
+    search_fields = ["book_id", "title", "authors", "isbn13"]
 
     def get_urls(self):
         urls = super().get_urls()

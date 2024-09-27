@@ -13,18 +13,22 @@ def handle_books_uploaded(file) -> tuple[int, dict]:
     Read the CSV file and create Book objects
     Return a list of invalid books
     """
-    books = []
-    invalid_books = {}
     file_data = io.TextIOWrapper(file.file, encoding="utf-8")
     reader = csv.DictReader(file_data)
-    for row in reader:
-        serializer = BookUploadSerializer(data=row)
-        if serializer.is_valid():
-            books.append(Book(**serializer.validated_data))
-        else:
-            invalid_books[row["isbn13"]] = treat_serializer_errors(serializer.errors)
-    Book.objects.bulk_create(books, batch_size=1000, ignore_conflicts=True)
-    return len(books), invalid_books
+    books = [row for row in reader]
+    serializer = BookUploadSerializer(data=books, many=True)
+    serializer.is_valid()
+    invalid_books = {}
+    valid_books = serializer.validated_data
+    if not valid_books:
+        for index, error in enumerate(serializer.errors):
+            if error:
+                invalid_books[books[index]["book_id"]] = treat_serializer_errors(error)
+            else:
+                valid_books.append(books[index])
+    book_list = [Book(**book) for book in valid_books]
+    Book.objects.bulk_create(book_list, batch_size=1000, ignore_conflicts=True)
+    return len(book_list), invalid_books
 
 
 def treat_serializer_errors(errors: dict) -> dict:

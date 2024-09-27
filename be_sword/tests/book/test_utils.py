@@ -29,12 +29,10 @@ class TestSendUploadedEmail:
     def test_send_uploaded_email(
         self, send_mail_mock: MagicMock, serializer_error: dict
     ):
-        send_uploaded_email(
-            3, {"1234567890123": {"isbn13": ["This Field Is Required."]}}
-        )
+        send_uploaded_email(3, {"50": {"isbn13": ["This Field Is Required."]}})
         send_mail_mock.assert_called_once_with(
             "Books uploaded",
-            "3 books uploaded successfully\nInvalid books: 1234567890123: {'isbn13': ['This Field Is Required.']}",
+            "3 books uploaded successfully\nInvalid books:\n50: {'isbn13': ['This Field Is Required.']}",
             "host_user@example.com",
             ["sysadmin@example.com"],
         )
