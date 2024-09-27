@@ -1,0 +1,35 @@
+.header {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 20px;
+    background-color: #000671;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+  
+.header-left h1 {
+    font-family: 'Gilmer', sans-serif;
+    font-size: 22px;
+    color: #ffee00;
+    margin: 0;
+}
+
+.header-left h2 {
+    font-family: 'Gilmer', sans-serif;
+    font-size: 14px;
+    color: #ffee00;
+    margin: 0;
+}
+  
+.header-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+  
+.header-center h3 {
+    font-family: 'Gilmer', sans-serif;
+    font-size: 28px;
+    color: #ffffff;
+}

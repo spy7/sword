@@ -1,0 +1,15 @@
+include:
+  - ../be_sword/docker-compose.yml
+
+services:
+  frontend:
+    build: .
+    env_file: .env
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      app:
+        condition: service_started
+

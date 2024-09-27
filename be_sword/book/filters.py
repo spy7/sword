@@ -16,8 +16,4 @@ class BookFilter(FilterSet):
         fields = ["title", "authors", "isbn13", "language_code"]
 
     def filter_by_search(self, queryset, name, value):
-        return queryset.filter(
-            Q(title__icontains=value)
-            | Q(authors__icontains=value)
-            | Q(isbn13__icontains=value)
-        )
+        return queryset.filter(Q(title__icontains=value) | Q(authors__icontains=value))

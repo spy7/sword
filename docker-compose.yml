@@ -1,0 +1,2 @@
+include:
+  - ./fe_sword/docker-compose.yml
