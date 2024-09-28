@@ -99,23 +99,25 @@ The **.env** file contains the environment variables used throughout the applica
 
 To run the application, ensure you have the following installed:
 
-**Git**: Required for version control and managing the source code.
+- **Git**: Required for version control and managing the source code.
 
-**Docker**: Necessary for running the application in a containerized environment.
+   [Git installation](https://git-scm.com/downloads)
 
-- [Git installation](https://git-scm.com/downloads)
-- [Docker installation](https://docs.docker.com/engine/install/ubuntu/)
+- **Docker**: Necessary for running the application in a containerized environment.
+
+   [Docker installation](https://docs.docker.com/engine/install/ubuntu/)
 
 ### Pre-requisites to run locally
 
 To work with the application locally, you will need:
 
-**Python**: Needed to run backend application.
+- **Python**: Needed to run backend application.
 
-**Node.js**: Required for running the frontend application.
+   [Python installation](https://www.python.org/downloads/)
 
-- [Python installation](https://www.python.org/downloads/)
-- [Node.js installation](https://nodejs.org/en/download/)
+- **Node.js**: Required for running the frontend application.
+
+   [Node.js installation](https://nodejs.org/en/download/)
 
 ## Running the application
 
