@@ -6,7 +6,8 @@ from django.urls import path
 
 from book.forms import UploadBooksForm
 from book.models import Book
-from book.utils import handle_books_uploaded, send_invalid_file_email
+from book.utils import handle_books_uploaded
+from book.utils import send_invalid_file_email
 from book.utils import send_uploaded_email
 
 
@@ -43,9 +44,7 @@ class BookAdmin(admin.ModelAdmin):
                 try:
                     success, invalid_books = handle_books_uploaded(file)
                 except KeyError:
-                    self.message_user(
-                        request, "Invalid file format", messages.ERROR
-                    )
+                    self.message_user(request, "Invalid file format", messages.ERROR)
                     send_invalid_file_email()
                     return redirect("admin:book_book_changelist")
                 self.message_user(
