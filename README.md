@@ -248,7 +248,7 @@ To work with the application locally, you will need:
 
 - **Ingest books**
 
-   In the administration page, select the `Books` model and click on the `Add Multiple Books` button. Then, click on `Choose File` to select a CSV file for importing books.
+   On the administration page, select the `Books` model and click on the `Add Multiple Books` button. Then, click on `Choose File` to select a CSV file for importing books. The result will be sent to the system administrator's email. If the Docker email server is in use, you can check the email messages on port 8025.
 
 - **Endpoints**
 
@@ -279,6 +279,10 @@ To work with the application locally, you will need:
        "customer_email": "<CUSTOMER_EMAIL>"
      }
      ```
+
+- **Reserve a book**
+
+   On the website, select a book by clicking on it. Then, click the `Reserve Book` button. Fill out the form with your name and email to reserve the book. Reserved books will be marked as such to prevent additional reservations.
 
 ## 🎯 Testing
 
