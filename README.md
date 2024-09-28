@@ -93,7 +93,11 @@ The **.env** file contains the environment variables used throughout the applica
 
 - The book ingestion process was developed using a provided file containing 10,000 records. By treating this file as a standard, the algorithm was optimized to perform efficiently.
 
-- The field `book_id` is unique and serves as the key, as the ISBN can sometimes be empty.
+- The `book_id` field was defined as unique and used as a key, since the ISBN may occasionally be empty.
+
+- It was assumed that user authentication is not required for the public-facing web page to ensure a smooth and simple user experience. Users can search and reserve books without logging in, while the admin interface handles authentication for managing books and reservations.
+
+- To prevent multiple reservations for the same book, the system was designed to allow only one reservation per book at any given time. This ensures that users cannot reserve a book that is already reserved.
 
 ## ⚙️ Setup instructions
 
@@ -239,7 +243,53 @@ To work with the application locally, you will need:
 
 - **Ingest books**
 
-   In the administration page, select the `Book` model and click on the `Add Multiple Books` button. Then, click on `Choose File` to select a CSV file for importing books.
+   In the administration page, select the `Books` model and click on the `Add Multiple Books` button. Then, click on `Choose File` to select a CSV file for importing books.
+
+- **Endpoints**
+
+  The following endpoints are defined in the backend:
+
+  - **GET** `/admin/` - Access the administration page.
+
+  - **GET** `/api/books/` - Retrieve a paginated list of books with the following format:
+
+    ```json
+    {
+      "count": <TOTAL NUMBER OF BOOKS>,
+      "next": "<LINK TO NEXT PAGE>",
+      "previous": "<LINK TO PREVIOUS PAGE>",
+      "results": [
+        <LIST OF BOOKS ON THIS PAGE>
+      ]
+    }
+    ```
+
+  - **GET** `/api/book/<ID>/` - Retrieve the details of the book with the specified ID.
+
+  - **POST** `/api/book/<ID>/reserve/` - Reserve the book specified by the ID using the following payload:
+
+     ```json
+     {
+       "customer_name": "<CUSTOMER NAME>",
+       "customer_email": "<CUSTOMER_EMAIL>"
+     }
+     ```
+
+## 🎯 Testing
+
+To execute unit and integration tests, use the commands below in their respective directories:
+
+- Backend
+
+  ```bash
+  pytest .
+  ```
+
+- Frontend
+
+  ```bash
+  npm test
+  ```
 
 ## ✅ Conclusion
 

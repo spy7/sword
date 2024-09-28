@@ -6,6 +6,7 @@ from django.urls import path
 
 from book.forms import UploadBooksForm
 from book.models import Book
+from book.models import BookReserve
 from book.utils import handle_books_uploaded
 from book.utils import send_invalid_file_email
 from book.utils import send_uploaded_email
@@ -67,3 +68,9 @@ class BookAdmin(admin.ModelAdmin):
             action="add",
         )
         return TemplateResponse(request, "admin/book/book/upload_file.html", context)
+
+
+@admin.register(BookReserve)
+class BookReserveAdmin(admin.ModelAdmin):
+    list_display = ["book", "reserve_date", "customer_name", "customer_email"]
+    search_fields = ["book__title", "customer_name", "customer_email"]

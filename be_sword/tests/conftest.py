@@ -8,6 +8,7 @@ from rest_framework.exceptions import ErrorDetail
 from rest_framework.test import APIClient
 
 from book.models import Book
+from book.models import BookReserve
 
 
 @pytest.fixture
@@ -82,3 +83,16 @@ def books(book: Book, book2: Book) -> list[Book]:
 @pytest.fixture
 def many_books() -> list[Book]:
     return [baker.make(Book) for _ in range(10)]
+
+
+@pytest.fixture
+def book_reserve(book: Book) -> BookReserve:
+    return baker.make(BookReserve, book=book)
+
+
+@pytest.fixture
+def reserve_payload() -> dict:
+    return {
+        "customer_name": "Some Customer",
+        "customer_email": "some@example.com",
+    }

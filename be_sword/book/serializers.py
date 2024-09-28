@@ -1,12 +1,24 @@
 from rest_framework import serializers
 
 from .models import Book
+from .models import BookReserve
 
 
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
-        fields = "__all__"
+        fields = [
+            "book_id",
+            "books_count",
+            "title",
+            "authors",
+            "isbn13",
+            "language_code",
+            "original_publication_year",
+            "average_rating",
+            "ratings_count",
+            "image_url",
+        ]
 
 
 class BookUploadSerializer(BookSerializer):
@@ -21,6 +33,24 @@ class BookUploadSerializer(BookSerializer):
         return super().to_internal_value(data)
 
 
+class BookDetailSerializer(BookSerializer):
+    is_reserved = serializers.SerializerMethodField()
+
+    class Meta(BookSerializer.Meta):
+        model = Book
+        fields = BookSerializer.Meta.fields + ["is_reserved"]
+
+    def get_is_reserved(self, obj):
+        return BookReserve.objects.filter(book=obj).exists()
+
+
 class BookResultSerializer(serializers.Serializer):
     number_of_books = serializers.IntegerField()
     invalid_books = serializers.ListField(child=serializers.CharField())
+
+
+class BookReserveSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BookReserve
+        fields = ["book", "reserve_date", "customer_name", "customer_email"]
+        read_only_fields = ["book", "reserve_date"]

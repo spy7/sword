@@ -28,3 +28,13 @@ class Book(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class BookReserve(models.Model):
+    book = models.OneToOneField(Book, on_delete=models.CASCADE)
+    reserve_date = models.DateTimeField(auto_now_add=True)
+    customer_name = models.CharField(max_length=255)
+    customer_email = models.EmailField()
+
+    def __str__(self):
+        return self.book.title
