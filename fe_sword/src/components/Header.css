@@ -33,3 +33,8 @@
     font-size: 28px;
     color: #ffffff;
 }
+
+.header-link {
+    text-decoration: none;
+    color: inherit;
+}
