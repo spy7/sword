@@ -199,7 +199,12 @@ To work with the application locally, you will need:
 
 5. **Database and e-mail:**
 
-   For local development, the application is initially configured to use a local SQLite database and the console as the email target. These settings are optimized for smooth operation.
+   For local development, the application is initially configured to use a local SQLite database and the console as the email target. These settings are optimized for smooth operation. To configure the local database, execute the following commands:
+
+   ```bash
+   python manage.py migrate
+   python manage.py seed --create-super-user
+   ```
 
    If you prefer to use Docker for the database and email, you can set the following environment variables:
 
