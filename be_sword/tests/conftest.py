@@ -54,6 +54,7 @@ def client() -> APIClient:
 def book() -> Book:
     return baker.make(
         Book,
+        book_id=1,
         title="Book one",
         authors="Author one",
         isbn13="1234567890123",
@@ -65,6 +66,7 @@ def book() -> Book:
 def book2() -> Book:
     return baker.make(
         Book,
+        book_id=2,
         title="Book two",
         authors="Somebody",
         isbn13="5555555555555",

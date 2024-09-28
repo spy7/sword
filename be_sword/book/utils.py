@@ -59,3 +59,15 @@ def send_uploaded_email(success: int, invalid_books: dict[str, dict]) -> None:
         message += "\n" + fail_message
 
     send_mail(subject, message, from_email, recipient_list)
+
+
+def send_invalid_file_email() -> None:
+    """
+    Send an email to the system admin about an invalid file
+    """
+    subject = settings.EMAIL_UPLOAD_SUBJECT
+    message = settings.EMAIL_INVALID_FILE_MESSAGE
+    from_email = settings.EMAIL_HOST_USER
+    recipient_list = [settings.EMAIL_SYSTEM_ADMIN]
+
+    send_mail(subject, message, from_email, recipient_list)

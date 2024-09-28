@@ -5,6 +5,7 @@ import pytest
 
 from book.models import Book
 from book.utils import handle_books_uploaded
+from book.utils import send_invalid_file_email
 from book.utils import send_uploaded_email
 from book.utils import treat_serializer_errors
 
@@ -26,13 +27,23 @@ class TestTreatSerializerErrors:
 
 class TestSendUploadedEmail:
     @patch("book.utils.send_mail")
-    def test_send_uploaded_email(
-        self, send_mail_mock: MagicMock, serializer_error: dict
-    ):
+    def test_send_uploaded_email(self, send_mail_mock: MagicMock):
         send_uploaded_email(3, {"50": {"isbn13": ["This Field Is Required."]}})
         send_mail_mock.assert_called_once_with(
             "Books uploaded",
             "3 books uploaded successfully\nInvalid books:\n50: {'isbn13': ['This Field Is Required.']}",
+            "host_user@example.com",
+            ["sysadmin@example.com"],
+        )
+
+
+class TestSendInvalidFileEmail:
+    @patch("book.utils.send_mail")
+    def test_send_invalid_file_email(self, send_mail_mock: MagicMock):
+        send_invalid_file_email()
+        send_mail_mock.assert_called_once_with(
+            "Books uploaded",
+            "Invalid file format",
             "host_user@example.com",
             ["sysadmin@example.com"],
         )

@@ -215,23 +215,28 @@ To work with the application locally, you will need:
 
 **Frontend Setup**:
 
-1. Navigate to the `fe_sword` directory.
+1. **Navigate to the `fe_sword` directory.**
 
    ```bash
    cd fe_sword
    ```
 
-2. Install all required dependencies:
+2. **Install all required dependencies:**
 
    ```bash
    npm install
    ```
 
-3. Start the react application:
+3. **Start the react application:**
 
    ```bash
    npm start
    ```
+
+## 🕹️ Operating
+
+- **Ingest books**
+In the administration page, select the `Book` model and click on the `Add Multiple Books` button. Then, click on `Choose File` to select a CSV file for importing books.
 
 ## ✅ Conclusion
 

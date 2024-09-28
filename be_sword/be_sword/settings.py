@@ -183,6 +183,7 @@ EMAIL_UPLOAD_MESSAGE = os.getenv(
     "EMAIL_UPLOAD_MESSAGE", "%s books uploaded successfully"
 )
 EMAIL_UPLOAD_FAIL = os.getenv("EMAIL_UPLOAD_FAIL", "Invalid books:")
+EMAIL_INVALID_FILE_MESSAGE = os.getenv("EMAIL_INVALID_FILE_MESSAGE", "Invalid file format")
 
 LOGGING = {
     "version": 1,
