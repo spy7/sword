@@ -93,6 +93,8 @@ The **.env** file contains the environment variables used throughout the applica
 
 - The book ingestion process was developed using a provided file containing 10,000 records. By treating this file as a standard, the algorithm was optimized to perform efficiently.
 
+- The field `book_id` is unique and serves as the key, as the ISBN can sometimes be empty.
+
 ## ⚙️ Setup instructions
 
 ### Pre-requisites to execute the app
@@ -236,7 +238,8 @@ To work with the application locally, you will need:
 ## 🕹️ Operating
 
 - **Ingest books**
-In the administration page, select the `Book` model and click on the `Add Multiple Books` button. Then, click on `Choose File` to select a CSV file for importing books.
+
+   In the administration page, select the `Book` model and click on the `Add Multiple Books` button. Then, click on `Choose File` to select a CSV file for importing books.
 
 ## ✅ Conclusion
 
