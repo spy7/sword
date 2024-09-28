@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from django.urls import path
 
+from book.forms import BookForm
 from book.forms import UploadBooksForm
 from book.models import Book
 from book.models import BookReserve
@@ -16,6 +17,7 @@ from book.utils import send_uploaded_email
 class BookAdmin(admin.ModelAdmin):
     list_display = ["book_id", "title", "authors", "isbn13"]
     search_fields = ["book_id", "title", "authors", "isbn13"]
+    form = BookForm
 
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
