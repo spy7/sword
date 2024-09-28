@@ -159,6 +159,10 @@ To work with the application locally, you will need:
    Password: postgres
    ```
 
+6. **Docker application map**
+
+![Docker application map](./images/docker.png)
+
 ## 💻 Working locally
 
 ### Backend setup
