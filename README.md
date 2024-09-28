@@ -1,17 +1,17 @@
 # Sword Health - Book Management Application 📚
 
-## Overview
+## 📖 Overview
 
 This application is a full-stack web application designed to manage a collection of book records. It consists of a backend built with Django and a frontend developed using React. The application provides features for searching and viewing book details, as well as administering books.
 
-## Project Structure
+## 🗂️ Project Structure
 
 The project is organized into two main folders:
 
 - **BE_SWORD**: Contains the backend implementation using Django, handling API requests and database interactions.
 - **FE_SWORD**: Contains the frontend implementation using React, providing a user interface for interacting with the backend.
 
-## Structure
+## 🏛️ Architecture
 
 ### Backend (BE_SWORD)
 
@@ -79,7 +79,7 @@ The primary entry point of the application, **App.js**, is responsible for routi
 
 The **.env** file contains the environment variables used throughout the application, while **package.json** lists the dependencies and packages required for the project.
 
-## Design choices
+## 🛠️ Design choices
 
 - Django was selected for its simplicity and effectiveness in building RESTful APIs. It facilitates the creation of an admin interface, views, serializers, and filters with remarkable ease, utilizing its robust and well-established functionalities.
 
@@ -89,11 +89,11 @@ The **.env** file contains the environment variables used throughout the applica
 
 - The frontend was designed to be user-friendly, displaying all loaded books along with a search bar and pagination features.
 
-## Assumptions
+## 💭 Assumptions
 
 - The book ingestion process was developed using a provided file containing 10,000 records. By treating this file as a standard, the algorithm was optimized to perform efficiently.
 
-## Setup instructions
+## ⚙️ Setup instructions
 
 ### Pre-requisites to execute the app
 
@@ -119,7 +119,7 @@ To work with the application locally, you will need:
 
    [Node.js installation](https://nodejs.org/en/download/)
 
-## Running the application
+## 🚀 Running the application
 
 1. **Setup**:
    - Build and start all Docker containers by running the following command:
@@ -153,7 +153,7 @@ To work with the application locally, you will need:
    Password: postgres
    ```
 
-## Working locally
+## 💻 Working locally
 
 ### Backend setup
 
@@ -233,6 +233,6 @@ To work with the application locally, you will need:
    npm start
    ```
 
-## Conclusion
+## ✅ Conclusion
 
 The Sword Book Application was designed to be simple, user-friendly, and performant, while meeting the requirements outlined in the technical challenge. It is also built for easy expansion and maintenance.
