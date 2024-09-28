@@ -1,11 +1,14 @@
 import csv
 import io
+import logging
 
 from django.conf import settings
 from django.core.mail import send_mail
 
 from book.models import Book
 from book.serializers import BookUploadSerializer
+
+logger = logging.getLogger(__name__)
 
 
 def handle_books_uploaded(file) -> tuple[int, dict]:
@@ -58,6 +61,8 @@ def send_uploaded_email(success: int, invalid_books: dict[str, dict]) -> None:
     if invalid_books:
         message += "\n" + fail_message
 
+    logging.info(message)
+
     send_mail(subject, message, from_email, recipient_list)
 
 
@@ -69,5 +74,7 @@ def send_invalid_file_email() -> None:
     message = settings.EMAIL_INVALID_FILE_MESSAGE
     from_email = settings.EMAIL_HOST_USER
     recipient_list = [settings.EMAIL_SYSTEM_ADMIN]
+
+    logging.error(message)
 
     send_mail(subject, message, from_email, recipient_list)

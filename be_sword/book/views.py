@@ -1,3 +1,5 @@
+import logging
+
 from django.db import IntegrityError
 from rest_framework import status
 from rest_framework.generics import CreateAPIView
@@ -11,6 +13,8 @@ from book.models import BookReserve
 from book.serializers import BookDetailSerializer
 from book.serializers import BookReserveSerializer
 from book.serializers import BookSerializer
+
+logger = logging.getLogger(__name__)
 
 
 class BookView(ListAPIView):
@@ -37,11 +41,13 @@ class BookReserveView(CreateAPIView):
                 book_reserve = BookReserve.objects.create(
                     book=book, **serializer.validated_data
                 )
+                logging.info("Book reserved successfully.")
                 return Response(
                     BookReserveSerializer(book_reserve).data,
                     status=status.HTTP_201_CREATED,
                 )
             except IntegrityError:
+                logging.warning("This book is already reserved.")
                 return Response(
                     {"detail": "This book is already reserved."},
                     status=status.HTTP_409_CONFLICT,
