@@ -26,8 +26,9 @@
     flex: 1;
 }
 
-.go-back-button {
-    margin-top: 20px;
+.go-back-button,
+.reserve-button {
+    margin: 20px 20px 0 0;
     padding: 10px 20px;
     background-color: #007bff;
     color: white;
@@ -37,8 +38,16 @@
     transition: background-color 0.3s;
 }
 
-.go-back-button:hover {
+.go-back-button:hover,
+.reserve-button:hover {
     background-color: #0056b3;
+}
+
+.reserve-button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: default;
+    opacity: 0.6;
 }
 
 .book-title {

@@ -1,0 +1,84 @@
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 90%;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    background-color: #007BFF;
+}
+
+.modal-header h2 {
+    margin: 0;
+    padding: 10px;
+}
+
+.modal-title {
+    font-size: 1.5em;
+    color: #333;
+}
+
+.modal-body {
+    padding: 10px 0 0 0;
+}
+
+.close-button {
+    border-radius: 6px;
+    border-style: none;
+    background-color: #4fa4fe;
+    padding: 0 6px;
+    margin: 10px;
+    text-size-adjust: bold;
+    color: gray;
+    font-size: 1.8em;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: red;
+    background-color: rgb(221, 128, 128);
+}
+
+.input-field {
+    width: 90%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.submit-button {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #0056b3;
+}
