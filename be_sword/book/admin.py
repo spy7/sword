@@ -1,19 +1,26 @@
-from django.contrib import admin
-from django.contrib import messages
+from book.forms import UploadBooksForm
+from book.models import Book
+from book.utils import handle_books_uploaded, send_uploaded_email
+from django.contrib import admin, messages
 from django.shortcuts import redirect
 from django.template.response import TemplateResponse
 from django.urls import path
-
-from book.forms import UploadBooksForm
-from book.models import Book
-from book.utils import handle_books_uploaded
-from book.utils import send_uploaded_email
 
 
 @admin.register(Book)
 class BookAdmin(admin.ModelAdmin):
     list_display = ["book_id", "title", "authors", "isbn13"]
     search_fields = ["book_id", "title", "authors", "isbn13"]
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+
+        if not obj:
+            last_book = Book.objects.order_by("book_id").last()
+            next_book_id = last_book.book_id + 1 if last_book else 1
+            form.base_fields["book_id"].initial = next_book_id
+
+        return form
 
     def get_urls(self):
         urls = super().get_urls()
