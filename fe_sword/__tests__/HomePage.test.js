@@ -50,7 +50,7 @@ describe('HomePage Component', () => {
             fireEvent.click(nextButton);
         });
 
-        expect(api.get).toHaveBeenCalledWith('/books/?limit=30&offset=30&search=');
+        expect(api.get).toHaveBeenCalledWith('/v1/books/?limit=30&offset=30&search=');
     });
 
     test('should navigate to the previous page', async () => {
@@ -81,7 +81,7 @@ describe('HomePage Component', () => {
             fireEvent.click(prevButton);
         });
 
-        expect(api.get).toHaveBeenCalledWith('/books/?limit=30&offset=0&search=');
+        expect(api.get).toHaveBeenCalledWith('/v1/books/?limit=30&offset=0&search=');
     });
 
     test('should toggle the advanced search', async () => {

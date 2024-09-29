@@ -22,18 +22,21 @@ be_sword
 ├── be_sword
 │   └── settings.py
 ├── book
+│   ├── v1
+|   │   ├── filters.py
+|   │   ├── serializers.py
+|   │   ├── urls.py
+|   │   └── views.py
 │   ├── admin.py
-│   ├── filters.py
 │   ├── forms.py
 │   ├── models.py
 │   ├── serializers.py
 │   ├── urls.py
-│   ├── utils.py
-│   └── views.py
+│   └── utils.py
 ├── scripts
 ├── tests
 ├── .env
-├── pyproject.toml
+└── pyproject.toml
 ```
 
 The **be_sword** folder contains the core Django configurations for the application. It includes the **settings.py** file, which defines essential settings and configurations for the project. When using Docker, these settings are loaded from environment variables specified in the **.env** file.
@@ -65,10 +68,10 @@ fe_sword
 |   ├── components
 |   ├── pages
 |   |   ├── HomePage.js
-|   |   ├── BookDetail.js
+|   |   └── BookDetail.js
 │   └── App.js
 ├── .env
-├── package.json
+└── package.json
 ```
 
 The project consists of two main **pages**: the **HomePage.js**, which displays a collection of books, and the **BookDetail.js** page, which provides detailed information about a specific book.
@@ -256,7 +259,7 @@ To work with the application locally, you will need:
 
   - **GET** `/admin/` - Access the administration page.
 
-  - **GET** `/api/books/` - Retrieve a paginated list of books with the following format:
+  - **GET** `/api/v1/books/` - Retrieve a paginated list of books with the following format:
 
     ```json
     {
@@ -269,9 +272,9 @@ To work with the application locally, you will need:
     }
     ```
 
-  - **GET** `/api/book/<ID>/` - Retrieve the details of the book with the specified ID.
+  - **GET** `/api/v1/book/<ID>/` - Retrieve the details of the book with the specified ID.
 
-  - **POST** `/api/book/<ID>/reserve/` - Reserve the book specified by the ID using the following payload:
+  - **POST** `/api/v1/book/<ID>/reserve/` - Reserve the book specified by the ID using the following payload:
 
      ```json
      {

@@ -7,12 +7,12 @@ from rest_framework.generics import ListAPIView
 from rest_framework.generics import RetrieveAPIView
 from rest_framework.response import Response
 
-from book.filters import BookFilter
 from book.models import Book
 from book.models import BookReserve
-from book.serializers import BookDetailSerializer
-from book.serializers import BookReserveSerializer
-from book.serializers import BookSerializer
+from book.v1.filters import BookFilter
+from book.v1.serializers import BookDetailSerializer
+from book.v1.serializers import BookReserveSerializer
+from book.v1.serializers import BookSerializer
 
 logger = logging.getLogger(__name__)
 

@@ -16,7 +16,7 @@ const BookDetail = () => {
   useEffect(() => {
     const fetchBookDetail = async () => {
       try {
-        const response = await api.get(`/book/${id}/`);
+        const response = await api.get(`/v1/book/${id}/`);
         setBook(response.data);
         setIsReserved(response.data.is_reserved);
       } catch (error) {
@@ -38,7 +38,7 @@ const BookDetail = () => {
 
   const handleReserve = async (formData) => {
     try {
-      const response = await api.post(`/book/${id}/reserve/`, JSON.stringify(formData), {
+      const response = await api.post(`/v1/book/${id}/reserve/`, JSON.stringify(formData), {
         headers: {
           'Content-Type': 'application/json'
         }
