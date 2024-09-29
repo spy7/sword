@@ -130,14 +130,23 @@ To work with the application locally, you will need:
 
 ## 🚀 Running the application
 
-1. **Setup**:
+1. **Clone the repository**:
+   - Clone the repository from GitHub using the following command:
+
+     ```bash
+     git clone git@github.com:spy7/sword.git
+     ```
+
+2. **Setup environment**:
    - Build and start all Docker containers by running the following command:
 
      ```bash
-     docker-compose up --build
+     docker compose up --build
      ```
 
-2. **Access the administration**:
+     **Note**: In newer Docker versions, the `docker compose` command is included by default. If you're using an older version, you may need to install `docker-compose` separately.
+
+3. **Access the administration**:
    - Open your web browser and navigate to `http://localhost:8000/admin` to access the administration page. Use the default admin credentials:
 
      ```text
@@ -145,13 +154,13 @@ To work with the application locally, you will need:
      password: admin
      ```
 
-3. **Access the application**:
+4. **Access the application**:
    - In your web browser, go to `http://localhost:3000` to access the frontend of the application.
 
-4. **Open e-mail server**
+5. **Open e-mail server**
    - To monitor emails sent by the backend, open `http://localhost:8025/` to access the mock email inbox.
 
-5. **Connect to database**
+6. **Connect to database**
    - If necessary, connect to the PostgreSQL database using the following credentials:
 
    ```text
