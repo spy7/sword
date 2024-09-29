@@ -18,7 +18,7 @@ const BookDetail = () => {
       try {
         const response = await api.get(`/v1/book/${id}/`);
         setBook(response.data);
-        setIsReserved(response.data.is_reserved);
+        setIsReserved(response.data ? response.data.is_reserved : false);
       } catch (error) {
         console.error('Error fetching book details:', error);
       } finally {

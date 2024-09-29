@@ -10,7 +10,8 @@ const mock_books = [
         average_rating: 4.5,
         ratings_count: 200,
         language_code: 'eng',
-        image_url: 'image1.jpg'
+        image_url: 'image1.jpg',
+        is_reserved: false
     },
     {
         book_id: 2,
@@ -21,7 +22,8 @@ const mock_books = [
         average_rating: 4.0,
         ratings_count: 50,
         language_code: 'pt',
-        image_url: 'image2.jpg'
+        image_url: 'image2.jpg',
+        is_reserved: true
     },
 ];
 
