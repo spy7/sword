@@ -1,3 +1,4 @@
+from django.contrib.postgres.indexes import GinIndex
 from django.db import models
 
 
@@ -25,6 +26,26 @@ class Book(models.Model):
     ratings_5 = models.IntegerField()
     image_url = models.URLField()
     small_image_url = models.URLField()
+
+    class Meta:
+        indexes = [
+            GinIndex(
+                fields=["title"],
+                name="gin_title_idx",
+                opclasses=["gin_trgm_ops"],
+            ),
+            GinIndex(
+                fields=["authors"],
+                name="gin_authors_idx",
+                opclasses=["gin_trgm_ops"],
+            ),
+            GinIndex(
+                fields=["isbn13"],
+                name="gin_isbn13_idx",
+                opclasses=["gin_trgm_ops"],
+            ),
+            models.Index(fields=["language_code"], name="language_code_idx"),
+        ]
 
     def __str__(self):
         return self.title
